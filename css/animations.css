@@ -1,0 +1,83 @@
+/* ===== Reveal ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Hero glows float ===== */
+.hero__glow--cyan {
+  animation: float-cyan 10s ease-in-out infinite;
+}
+
+.hero__glow--violet {
+  animation: float-violet 12s ease-in-out infinite;
+}
+
+@keyframes float-cyan {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+@keyframes float-violet {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-25px, 20px) scale(1.08); }
+  66% { transform: translate(15px, -25px) scale(0.92); }
+}
+
+/* ===== Cursor blink ===== */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.syn-cursor {
+  animation: blink 0.8s step-end infinite;
+}
+
+/* ===== Nav burger active ===== */
+.nav__burger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav__burger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav__burger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ===== Link hover underline (nav handled separately) ===== */
+.blog-card__link,
+.product-card__link {
+  position: relative;
+}
+
+.blog-card__link::after,
+.product-card__link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent-primary);
+  transition: width var(--transition);
+}
+
+.blog-card__link:hover::after,
+.product-card__link:hover::after {
+  width: 100%;
+}
+
+/* ===== Smooth scroll offset for anchors ===== */
+:target {
+  scroll-margin-top: calc(var(--nav-height) + 1rem);
+}

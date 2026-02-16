@@ -1,0 +1,46 @@
+:root {
+  /* Backgrounds */
+  --bg-deep: #0a0a0f;
+  --bg-surface: #12121a;
+  --bg-elevated: #1a1a26;
+
+  /* Accents */
+  --accent-primary: #00e5ff;
+  --accent-secondary: #7b61ff;
+  --accent-cta: #ff6b35;
+
+  /* Text */
+  --text-primary: #e8e6e3;
+  --text-secondary: #8a8a9a;
+
+  /* Syntax highlighting (Dracula-style) */
+  --syn-keyword: #ff79c6;
+  --syn-function: #50fa7b;
+  --syn-string: #f1fa8c;
+  --syn-variable: #8be9fd;
+  --syn-comment: #6272a4;
+  --syn-number: #bd93f9;
+
+  /* Fonts */
+  --font-heading: 'Unbounded', cursive;
+  --font-body: 'Commissioner', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+
+  /* Container */
+  --container-max: 1200px;
+  --container-padding: 1.25rem;
+
+  /* Misc */
+  --radius: 12px;
+  --radius-sm: 8px;
+  --transition: 0.3s ease;
+  --nav-height: 70px;
+}

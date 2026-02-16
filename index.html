@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ivantitov.tech — Вайбкодинг в 1С</title>
+  <meta name="description" content="Вайбкодинг в 1С — автоматизация, продукты и экспертиза. Иван Титов.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Commissioner:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <!-- Noise overlay -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo">ivantitov<span class="nav__logo-dot">.</span>tech</a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#about" class="nav__link">О вайбкодинге</a></li>
+        <li><a href="#products" class="nav__link">Продукты</a></li>
+        <li><a href="#blog" class="nav__link">Блог</a></li>
+        <li><a href="#contacts" class="nav__link">Контакты</a></li>
+      </ul>
+      <button class="nav__burger" id="navBurger" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile overlay -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <ul class="mobile-overlay__links">
+      <li><a href="#about" class="mobile-overlay__link">О вайбкодинге</a></li>
+      <li><a href="#products" class="mobile-overlay__link">Продукты</a></li>
+      <li><a href="#blog" class="mobile-overlay__link">Блог</a></li>
+      <li><a href="#contacts" class="mobile-overlay__link">Контакты</a></li>
+    </ul>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero__glow hero__glow--cyan" aria-hidden="true"></div>
+    <div class="hero__glow hero__glow--violet" aria-hidden="true"></div>
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <span class="hero__label reveal" data-delay="0">ВАЙБКОДИНГ В 1С</span>
+        <h1 class="hero__title reveal" data-delay="100">
+          Код, который<br>
+          <span class="hero__title-accent">чувствует</span> бизнес
+        </h1>
+        <p class="hero__subtitle reveal" data-delay="200">
+          Автоматизация 1С нового поколения — когда код пишется в потоке, а решения рождаются на стыке технологий и интуиции.
+        </p>
+        <a href="#products" class="hero__cta reveal" data-delay="300">Смотреть продукты</a>
+      </div>
+      <div class="hero__code reveal" data-delay="200">
+        <div class="code-window">
+          <div class="code-window__header">
+            <div class="code-window__dots">
+              <span class="code-window__dot code-window__dot--red"></span>
+              <span class="code-window__dot code-window__dot--yellow"></span>
+              <span class="code-window__dot code-window__dot--green"></span>
+            </div>
+            <span class="code-window__filename">ВайбМодуль.bsl</span>
+          </div>
+          <div class="code-window__body">
+            <pre class="code-window__pre"><code id="codeOutput"></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container about__inner">
+      <h2 class="section-title reveal">Что такое вайбкодинг?</h2>
+      <div class="about__content">
+        <p class="about__text reveal" data-delay="100">
+          Вайбкодинг — это подход к разработке, где код рождается в состоянии потока. Вместо механического написания строк вы входите в ритм задачи, чувствуете архитектуру и позволяете решениям приходить естественно.
+        </p>
+        <p class="about__text reveal" data-delay="200">
+          В мире 1С это особенно мощно. Когда вы глубоко понимаете бизнес-процессы и владеете платформой, код становится продолжением мысли. AI-инструменты усиливают этот поток, превращая идею в работающее решение за минуты, а не дни.
+        </p>
+        <blockquote class="about__quote reveal" data-delay="300">
+          «Лучший код пишется не руками — он пишется состоянием. Вайбкодинг — это когда ты и машина думаете вместе.»
+        </blockquote>
+        <p class="about__text reveal" data-delay="400">
+          Я совмещаю многолетний опыт в 1С с современными AI-подходами, создавая инструменты и решения, которые ускоряют разработку в разы. Этот сайт — точка входа в мой мир вайбкодинга.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products" id="products">
+    <div class="container">
+      <h2 class="section-title reveal">Продукты</h2>
+      <p class="section-subtitle reveal" data-delay="100">Инструменты, рождённые в потоке</p>
+      <div class="products__grid">
+        <article class="product-card reveal" data-delay="100">
+          <div class="product-card__accent product-card__accent--cyan"></div>
+          <div class="product-card__icon">⚡</div>
+          <h3 class="product-card__title">ВайбАнализ</h3>
+          <p class="product-card__desc">Интеллектуальный анализ данных 1С с AI-подсказками. Находит аномалии и паттерны, которые не видит человек.</p>
+          <div class="product-card__footer">
+            <span class="product-card__price">Скоро</span>
+            <a href="#contacts" class="product-card__link">Узнать больше →</a>
+          </div>
+        </article>
+        <article class="product-card reveal" data-delay="200">
+          <div class="product-card__accent product-card__accent--violet"></div>
+          <div class="product-card__icon">🔄</div>
+          <h3 class="product-card__title">АвтоПоток</h3>
+          <p class="product-card__desc">Автоматизация рутинных операций в 1С. Настройте один раз — работает само, освобождая время для творчества.</p>
+          <div class="product-card__footer">
+            <span class="product-card__price">Скоро</span>
+            <a href="#contacts" class="product-card__link">Узнать больше →</a>
+          </div>
+        </article>
+        <article class="product-card reveal" data-delay="300">
+          <div class="product-card__accent product-card__accent--orange"></div>
+          <div class="product-card__icon">🧩</div>
+          <h3 class="product-card__title">КодМастер</h3>
+          <p class="product-card__desc">Генератор типовых модулей 1С по описанию на естественном языке. Скажите что нужно — получите готовый код.</p>
+          <div class="product-card__footer">
+            <span class="product-card__price">Скоро</span>
+            <a href="#contacts" class="product-card__link">Узнать больше →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section class="blog" id="blog">
+    <div class="container">
+      <h2 class="section-title reveal">Блог</h2>
+      <p class="section-subtitle reveal" data-delay="100">Мысли о коде, AI и потоке</p>
+      <div class="blog__list">
+        <article class="blog-card reveal" data-delay="100">
+          <time class="blog-card__date">12 февраля 2026</time>
+          <h3 class="blog-card__title">Как AI меняет разработку в 1С</h3>
+          <p class="blog-card__excerpt">Разбираю реальные кейсы, где Claude и другие LLM ускорили разработку модулей 1С в 5-10 раз. Что работает, а что пока нет.</p>
+          <a href="#" class="blog-card__link">Читать далее →</a>
+        </article>
+        <article class="blog-card reveal" data-delay="200">
+          <time class="blog-card__date">5 февраля 2026</time>
+          <h3 class="blog-card__title">Вайбкодинг: философия или методология?</h3>
+          <p class="blog-card__excerpt">Откуда взялся термин, почему он резонирует с разработчиками и как применять принципы потокового состояния в ежедневной работе.</p>
+          <a href="#" class="blog-card__link">Читать далее →</a>
+        </article>
+        <article class="blog-card reveal" data-delay="300">
+          <time class="blog-card__date">28 января 2026</time>
+          <h3 class="blog-card__title">Архитектура 1С-решений: от хаоса к потоку</h3>
+          <p class="blog-card__excerpt">Как правильная архитектура модулей позволяет писать код быстрее и с меньшим количеством ошибок. Паттерны, которые работают.</p>
+          <a href="#" class="blog-card__link">Читать далее →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacts -->
+  <section class="contacts" id="contacts">
+    <div class="container">
+      <h2 class="section-title reveal">Контакты</h2>
+      <div class="contacts__inner">
+        <div class="contacts__info reveal" data-delay="100">
+          <p class="contacts__text">Хотите обсудить проект, задать вопрос или просто поговорить о вайбкодинге? Напишите мне.</p>
+          <ul class="contacts__socials">
+            <li><a href="#" class="contacts__social-link">Telegram</a></li>
+            <li><a href="#" class="contacts__social-link">GitHub</a></li>
+            <li><a href="#" class="contacts__social-link">YouTube</a></li>
+          </ul>
+        </div>
+        <form class="contacts__form reveal" data-delay="200" id="contactForm">
+          <div class="form-group">
+            <input type="text" name="name" class="form-input" placeholder="Имя" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" class="form-input" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <textarea name="message" class="form-input form-textarea" placeholder="Сообщение" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Отправить</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span class="footer__copy">&copy; 2026 ivantitov.tech</span>
+    </div>
+  </footer>
+
+  <script src="js/typing.js"></script>
+  <script src="js/scroll-reveal.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
