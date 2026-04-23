@@ -65,3 +65,8 @@ npx serve
 ## Лицензия
 
 © 2026 ivantitov.tech
+
+
+[**Этот репозиторий использован в статье**](https://infostart.ru/1c/articles/2675355).
+![alt text](https://infostart.ru/bitrix/templates/sandbox_empty/assets/tpl/abo/img/logo.svg)
+ 
