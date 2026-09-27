@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ivantitov.tech — Вайбкодинг в 1С | Выгрузка УТ в БП, OLE-обмен 1С</title>
-  <meta name="description" content="Иван Титов — разработчик 1С. Многофункциональная выгрузка из 1С УТ 11/10 в 1С БП 3/2: сопоставление номенклатуры, контрагентов, складов, свёртка по НДС. OLE/COM обмен без доработки конфигураций.">
-  <meta name="keywords" content="выгрузка УТ11 БП3, выгрузка УТ10 БП2, обмен 1С УТ БП, многофункциональная выгрузка 1С, сопоставление номенклатуры 1С, свёртка по НДС 1С, OLE обмен 1С, УТ 11 БП 3 обмен, выгрузка ERP БП3, обмен КА2 БП3">
+  <title>ivantitov.tech — Вайбкодинг в 1С | OSS, MCP-серверы, AI-инструменты</title>
+  <meta name="description" content="Иван Титов — разработчик 1С и автор open-source инструментов: PromptPilot (планировщик AI CLI), Claude Note (синтез сессий Claude Code), 77MCP (MCP для 1С 7.7), ConfluenceMCP (умный поиск по wiki), Zapis (локальная транскрибация), OneBase (1С-подобная платформа на Go). А также «Сказки Королевства» — самопишущаяся RPG на Godot, и МультиВыгрузка 1С: OLE/COM обмен между УТ 11/10 и БП 3/2.">
+  <meta name="keywords" content="вайбкодинг 1С, PromptPilot, Claude Note, OneBase, Zapis, 77MCP, ConfluenceMCP, MCP-сервер 1С, MCP Confluence, AI CLI планировщик, Claude Code очередь, метаданные 1С 7.7, транскрибация GigaAM, выгрузка УТ11 БП3, выгрузка УТ10 БП2, обмен 1С УТ БП, OLE обмен 1С, 1С-подобная платформа Go">
   <link rel="canonical" href="https://ivantitov.tech/">
   <script type="application/ld+json">
   {
@@ -55,7 +55,7 @@
       <ul class="nav__links" id="navLinks">
         <li><a href="#about" class="nav__link">О вайбкодинге</a></li>
         <li><a href="#products" class="nav__link">Продукты</a></li>
-        <li><a href="#blog" class="nav__link">Блог</a></li>
+        <li><a href="#opensource" class="nav__link">Open Source</a></li>
         <li><a href="#contacts" class="nav__link">Контакты</a></li>
       </ul>
       <button class="nav__burger" id="navBurger" aria-label="Открыть меню">
@@ -71,7 +71,7 @@
     <ul class="mobile-overlay__links">
       <li><a href="#about" class="mobile-overlay__link">О вайбкодинге</a></li>
       <li><a href="#products" class="mobile-overlay__link">Продукты</a></li>
-      <li><a href="#blog" class="mobile-overlay__link">Блог</a></li>
+      <li><a href="#opensource" class="mobile-overlay__link">Open Source</a></li>
       <li><a href="#contacts" class="mobile-overlay__link">Контакты</a></li>
     </ul>
   </div>
@@ -192,54 +192,331 @@
 
           </div>
         </article>
-        <article class="product-card reveal" data-delay="200">
-          <div class="product-card__accent product-card__accent--violet"></div>
-          <div class="product-card__icon">🔄</div>
-          <h3 class="product-card__title">АвтоПоток</h3>
-          <p class="product-card__desc">Автоматизация рутинных операций в 1С. Настройте один раз — работает само, освобождая время для творчества.</p>
-          <div class="product-card__footer">
-            <span class="product-card__price">Скоро</span>
-            <a href="#contacts" class="product-card__link">Узнать больше →</a>
-          </div>
-        </article>
-        <article class="product-card reveal" data-delay="300">
-          <div class="product-card__accent product-card__accent--orange"></div>
-          <div class="product-card__icon">🧩</div>
-          <h3 class="product-card__title">КодМастер</h3>
-          <p class="product-card__desc">Генератор типовых модулей 1С по описанию на естественном языке. Скажите что нужно — получите готовый код.</p>
-          <div class="product-card__footer">
-            <span class="product-card__price">Скоро</span>
-            <a href="#contacts" class="product-card__link">Узнать больше →</a>
-          </div>
-        </article>
       </div>
     </div>
   </section>
 
-  <!-- Blog -->
-  <section class="blog" id="blog">
+  <!-- Open Source -->
+  <section class="opensource" id="opensource">
     <div class="container">
-      <h2 class="section-title reveal">Блог</h2>
-      <p class="section-subtitle reveal" data-delay="100">Мысли о коде, AI и потоке</p>
-      <div class="blog__list">
-        <article class="blog-card reveal" data-delay="100">
-          <time class="blog-card__date">12 февраля 2026</time>
-          <h3 class="blog-card__title">Как AI меняет разработку в 1С</h3>
-          <p class="blog-card__excerpt">Разбираю реальные кейсы, где Claude и другие LLM ускорили разработку модулей 1С в 5-10 раз. Что работает, а что пока нет.</p>
-          <a href="#" class="blog-card__link">Читать далее →</a>
+      <h2 class="section-title reveal">Open Source</h2>
+      <p class="section-subtitle reveal" data-delay="100">Мои репозитории — инструменты вайбкодинга, рождённые из реальных задач разработки</p>
+
+      <div class="opensource__grid">
+
+        <!-- PromptPilot -->
+        <article class="oss-card oss-card--cyan reveal" data-delay="100">
+          <div class="oss-card__accent"></div>
+          <div class="oss-card__header">
+            <div class="oss-card__icon">🛩️</div>
+            <div class="oss-card__title-wrap">
+              <h3 class="oss-card__title">PromptPilot</h3>
+              <p class="oss-card__tagline">Background task queue для AI CLI</p>
+            </div>
+          </div>
+          <p class="oss-card__desc">
+            Универсальный планировщик промптов для <strong>Claude Code, Codex, Qwen, Cursor</strong> и любых других AI CLI. Очередь с приоритетами, расписание, автоматический retry при rate-limit, Web UI и Telegram-бот с авторизацией по номеру телефона.
+          </p>
+          <div class="oss-card__tags">
+            <span class="tech-badge">Python 3.10+</span>
+            <span class="tech-badge">FastAPI</span>
+            <span class="tech-badge">SQLite</span>
+            <span class="tech-badge">Telegram Bot</span>
+            <span class="tech-badge">PyInstaller</span>
+          </div>
+          <ul class="oss-card__features">
+            <li>Мульти-провайдер: Claude / Codex / Qwen / Cursor / OpenCode — или свой кастомный CLI</li>
+            <li>Exponential backoff при rate-limit (60s → 1h) + crash recovery воркера</li>
+            <li>Telegram-бот: создание задач, выбор модели, скилы Claude Code, продолжение сессий</li>
+            <li>Повторяющиеся задачи (<code>daily@09:00</code>, <code>6h</code>) и фоновый detached-запуск</li>
+            <li>Standalone <code>pp.exe</code> + tray-приложение для Windows</li>
+          </ul>
+          <div class="oss-card__links">
+            <a href="https://github.com/ivanarama/PromptPilot" target="_blank" rel="noopener" class="oss-link oss-link--primary">
+              <span class="oss-link__icon" aria-hidden="true">⌥</span> GitHub
+            </a>
+            <a href="https://www.youtube.com/watch?v=v5pFSixGX-E" target="_blank" rel="noopener" class="oss-link">
+              <span class="oss-link__icon" aria-hidden="true">▶</span> Видео
+            </a>
+            <a href="https://infostart.ru/1c/articles/2653416/" target="_blank" rel="noopener" class="oss-link">
+              <span class="oss-link__icon" aria-hidden="true">●</span> Инфостарт
+            </a>
+            <a href="https://habr.com/ru/articles/1018950/" target="_blank" rel="noopener" class="oss-link">
+              <span class="oss-link__icon" aria-hidden="true">#</span> Хабр
+            </a>
+          </div>
         </article>
-        <article class="blog-card reveal" data-delay="200">
-          <time class="blog-card__date">5 февраля 2026</time>
-          <h3 class="blog-card__title">Вайбкодинг: философия или методология?</h3>
-          <p class="blog-card__excerpt">Откуда взялся термин, почему он резонирует с разработчиками и как применять принципы потокового состояния в ежедневной работе.</p>
-          <a href="#" class="blog-card__link">Читать далее →</a>
+
+        <!-- Сказки Королевства -->
+        <article class="oss-card oss-card--violet reveal" data-delay="200">
+          <div class="oss-card__accent"></div>
+          <div class="oss-card__header">
+            <div class="oss-card__icon">🏔️</div>
+            <div class="oss-card__title-wrap">
+              <h3 class="oss-card__title">Сказки Королевства</h3>
+              <p class="oss-card__tagline">Самопишущаяся пошаговая RPG на Godot</p>
+            </div>
+          </div>
+          <p class="oss-card__desc">
+            Ламповая тактическая RPG в духе <strong>King's Bounty и HoMM III</strong> — без замков и рутины.
+            Игроки предлагают идеи и баги, их проходит суд концепции, код пишет Gemini, независимое ревью
+            делает вторая модель, а конвейер PromptPilot собирает и выпускает новые версии автоматически.
+          </p>
+          <div class="oss-card__tags">
+            <span class="tech-badge">Godot 4.7</span>
+            <span class="tech-badge">Gemini CLI</span>
+            <span class="tech-badge">PromptPilot</span>
+            <span class="tech-badge">Android</span>
+          </div>
+          <ul class="oss-card__features">
+            <li>Тактические бои на гексах со шкалой инициативы</li>
+            <li>Карта приключений: мельница, святилище маны, роща фей, засады</li>
+            <li>Книга заклинаний героя: Огненный Шар, Исцеление, Благословение</li>
+            <li>Конвейер «предложил → приняли → Gemini написал → вышло в релизе»</li>
+          </ul>
+          <div class="oss-card__links">
+            <a href="/kt/" target="_blank" rel="noopener" class="oss-link oss-link--primary">
+              <span class="oss-link__icon" aria-hidden="true">🏔️</span> Страница игры
+            </a>
+            <a href="https://github.com/ivanarama/kingdom-tales-rpg" target="_blank" rel="noopener" class="oss-link">
+              <span class="oss-link__icon" aria-hidden="true">⌥</span> GitHub
+            </a>
+          </div>
         </article>
-        <article class="blog-card reveal" data-delay="300">
-          <time class="blog-card__date">28 января 2026</time>
-          <h3 class="blog-card__title">Архитектура 1С-решений: от хаоса к потоку</h3>
-          <p class="blog-card__excerpt">Как правильная архитектура модулей позволяет писать код быстрее и с меньшим количеством ошибок. Паттерны, которые работают.</p>
-          <a href="#" class="blog-card__link">Читать далее →</a>
+
+        <!-- Claude Note -->
+        <article class="oss-card oss-card--violet reveal" data-delay="200">
+          <div class="oss-card__accent"></div>
+          <div class="oss-card__header">
+            <div class="oss-card__icon">🧠</div>
+            <div class="oss-card__title-wrap">
+              <h3 class="oss-card__title">Claude Note</h3>
+              <p class="oss-card__tagline">Автосинтез знаний из сессий Claude Code → Obsidian</p>
+            </div>
+          </div>
+          <p class="oss-card__desc">
+            Фоновый сервис, который слушает хуки Claude Code и через ту же модель синтезирует ключевые решения, паттерны и открытые вопросы из транскриптов сессий в ваш Obsidian-vault. Дополнительно ведёт <code>MEMORY.md</code> в каждом проекте — Claude перестаёт забывать контекст между сессиями.
+          </p>
+          <div class="oss-card__tags">
+            <span class="tech-badge">Python 3.11+</span>
+            <span class="tech-badge">Claude Hooks</span>
+            <span class="tech-badge">Obsidian</span>
+            <span class="tech-badge">Windows · macOS · Linux</span>
+            <span class="tech-badge">qmd · semantic search</span>
+          </div>
+          <ul class="oss-card__features">
+            <li>Hook-интеграция: <code>PostToolUse</code>, <code>UserPromptSubmit</code>, <code>Stop</code> → очередь событий</li>
+            <li>Synthesis-режимы: log / inbox / route — маршрутизация по существующим заметкам vault</li>
+            <li>Auto-Memory: децки <code>MEMORY.md</code> с дедупликацией и pruning по бюджету строк</li>
+            <li>Архив всех промптов в отдельной заметке + tracker открытых вопросов</li>
+            <li>Web UI на <code>:8080</code> и трей-приложение <code>cn.exe</code> для Windows</li>
+          </ul>
+          <div class="oss-card__links">
+            <a href="https://github.com/ivanarama/claude-note" target="_blank" rel="noopener" class="oss-link oss-link--primary">
+              <span class="oss-link__icon" aria-hidden="true">⌥</span> GitHub
+            </a>
+            <a href="https://www.youtube.com/watch?v=AioNnBFMA4g" target="_blank" rel="noopener" class="oss-link">
+              <span class="oss-link__icon" aria-hidden="true">▶</span> Видео
+            </a>
+            <a href="https://infostart.ru/1c/articles/2659511/" target="_blank" rel="noopener" class="oss-link">
+              <span class="oss-link__icon" aria-hidden="true">●</span> Инфостарт
+            </a>
+          </div>
         </article>
+
+        <!-- Zapis -->
+        <article class="oss-card oss-card--orange reveal" data-delay="300">
+          <div class="oss-card__accent"></div>
+          <div class="oss-card__header">
+            <div class="oss-card__icon">🎙️</div>
+            <div class="oss-card__title-wrap">
+              <h3 class="oss-card__title">Записная книжка <span class="oss-card__title-en">/ Zapis</span></h3>
+              <p class="oss-card__tagline">Локальная транскрибация и LLM-постобработка</p>
+            </div>
+          </div>
+          <p class="oss-card__desc">
+            Десктопное приложение для офлайн-транскрибации аудио и видео с таймкодами на уровне слов. Два движка распознавания на выбор — <strong>GigaAM v3</strong> (русский) и <strong>faster-whisper</strong> (мультиязык). LLM-постобработка превращает транскрипт в YouTube-описание, таймкоды, Telegram-пост или статью.
+          </p>
+          <div class="oss-card__tags">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">FastAPI</span>
+            <span class="tech-badge">pywebview</span>
+            <span class="tech-badge">GigaAM v3 + KenLM</span>
+            <span class="tech-badge">faster-whisper</span>
+            <span class="tech-badge">OpenAI · Anthropic</span>
+          </div>
+          <ul class="oss-card__features">
+            <li>Таймкоды на уровне слов с точностью до 40 мс</li>
+            <li>Экспорт TXT / SRT / VTT — готовые субтитры для YouTube и плееров</li>
+            <li>4 пресета LLM-обработки + свободные вопросы к транскрипту</li>
+            <li>SSE-стриминг ответов LLM с fallback-цепочкой по профилям</li>
+            <li>Standalone <code>Zapis.exe</code>, модели подтягиваются лениво из HuggingFace</li>
+          </ul>
+          <div class="oss-card__links">
+            <span class="oss-link oss-link--soon">
+              <span class="oss-link__icon" aria-hidden="true">⌥</span> GitHub · скоро
+            </span>
+            <span class="oss-link oss-link--soon">
+              <span class="oss-link__icon" aria-hidden="true">▶</span> Видео · скоро
+            </span>
+            <span class="oss-link oss-link--soon">
+              <span class="oss-link__icon" aria-hidden="true">●</span> Статья · скоро
+            </span>
+          </div>
+        </article>
+
+        <!-- OneBase -->
+        <article class="oss-card oss-card--gold reveal" data-delay="400">
+          <div class="oss-card__accent"></div>
+          <div class="oss-card__header">
+            <div class="oss-card__icon">🗄️</div>
+            <div class="oss-card__title-wrap">
+              <h3 class="oss-card__title">OneBase</h3>
+              <p class="oss-card__tagline">Открытая 1С-подобная платформа на Go</p>
+            </div>
+          </div>
+          <p class="oss-card__desc">
+            Одна папка с YAML-метаданными + один Go-бинарник на 20 МБ + PostgreSQL — и через 10 минут у вас работающая учётная система с веб-интерфейсом, проводкой документов, печатными формами, отчётами с диаграммами и REST API. Совместима по подходам с 1С: справочники, документы, регистры, запросы на русском, <code>.os</code>-модули — но открытая, кроссплатформенная и без лицензий.
+          </p>
+          <div class="oss-card__tags">
+            <span class="tech-badge">Go 1.23+</span>
+            <span class="tech-badge">PostgreSQL 14+</span>
+            <span class="tech-badge">WebView2</span>
+            <span class="tech-badge">DSL: 1С-подобный язык</span>
+            <span class="tech-badge">ECharts</span>
+            <span class="tech-badge">Cloudflare Tunnel</span>
+          </div>
+          <ul class="oss-card__features">
+            <li>Лаунчер «Запуск 1С:Предприятие» — управление списком информационных баз</li>
+            <li>Два режима конфигурации: файловый (git + hot reload) или в БД (визуальный конфигуратор)</li>
+            <li>DSL: <code>Запрос</code>, <code>Движения</code>, <code>НачатьТранзакцию</code>, <code>Попытка</code>, <code>ТабличныйДокумент</code></li>
+            <li>Диаграммы в отчётах — программно, как в 1С (гистограмма / линейная / круговая)</li>
+            <li>Работает на Orange Pi 4GB: 5–10 баз и сайт проекта одновременно</li>
+          </ul>
+          <div class="oss-card__demo-note">
+            <span class="oss-card__demo-label">Доступ к демо:</span>
+            <span class="oss-card__demo-creds">логин <code>Пользователь</code> · пароль <code>12345</code></span>
+          </div>
+          <div class="oss-card__links">
+            <a href="https://github.com/ivanarama/onebase" target="_blank" rel="noopener" class="oss-link oss-link--primary">
+              <span class="oss-link__icon" aria-hidden="true">⌥</span> GitHub
+            </a>
+            <a href="https://onebase.ivantitov.tech" target="_blank" rel="noopener" class="oss-link oss-link--primary">
+              <span class="oss-link__icon" aria-hidden="true">🌐</span> Сайт проекта
+            </a>
+            <a href="https://demo.ivantitov.tech" target="_blank" rel="noopener" class="oss-link oss-link--demo">
+              <span class="oss-link__icon" aria-hidden="true">◉</span> Демо-база
+            </a>
+            <span class="oss-link oss-link--soon">
+              <span class="oss-link__icon" aria-hidden="true">▶</span> Видео · скоро
+            </span>
+            <span class="oss-link oss-link--soon">
+              <span class="oss-link__icon" aria-hidden="true">●</span> Статья · скоро
+            </span>
+          </div>
+        </article>
+
+        <!-- 77MCP -->
+        <article class="oss-card oss-card--pink reveal" data-delay="500">
+          <div class="oss-card__accent"></div>
+          <div class="oss-card__header">
+            <div class="oss-card__icon">🗂️</div>
+            <div class="oss-card__title-wrap">
+              <h3 class="oss-card__title">77MCP <span class="oss-card__title-en">/ mcp-1c77</span></h3>
+              <p class="oss-card__tagline">MCP-сервер для анализа метаданных 1С 7.7</p>
+            </div>
+          </div>
+          <p class="oss-card__desc">
+            Подключает Claude Code и других MCP-клиентов к старым конфигурациям <strong>1С:Предприятие 7.7</strong>. Парсит OLE-контейнер <code>1Cv7.MD</code> и скобочный синтаксис, открывает LLM доступ к справочникам, документам, регистрам, формам и исходному коду модулей — включая глобальный модуль и пакетные запросы.
+          </p>
+          <div class="oss-card__tags">
+            <span class="tech-badge">Python 3.11+</span>
+            <span class="tech-badge">FastMCP</span>
+            <span class="tech-badge">MCP over SSE</span>
+            <span class="tech-badge">OLE Compound Doc</span>
+            <span class="tech-badge">Docker</span>
+          </div>
+          <ul class="oss-card__features">
+            <li>15+ MCP-инструментов: <code>list_objects</code>, <code>get_module</code>, <code>search_in_modules</code>, <code>resolve_id</code></li>
+            <li>Валидация путей реквизитов и текста запросов: <code>Товар.Артикул</code> → ✓ / ✗</li>
+            <li>Извлечение исходного кода глобального модуля с авто-усечением для больших файлов</li>
+            <li>Полнотекстовый поиск по всем модулям с контекстными строками</li>
+            <li>Web-интерфейс для drag-and-drop файла <code>1Cv7.MD</code> + Docker compose</li>
+          </ul>
+          <div class="oss-card__links">
+            <a href="https://github.com/ivanarama/77MCP" target="_blank" rel="noopener" class="oss-link oss-link--primary">
+              <span class="oss-link__icon" aria-hidden="true">⌥</span> GitHub
+            </a>
+            <a href="https://youtu.be/-m0ZqXGl7To" target="_blank" rel="noopener" class="oss-link">
+              <span class="oss-link__icon" aria-hidden="true">▶</span> Видео
+            </a>
+            <a href="https://infostart.ru/1c/articles/2626132/" target="_blank" rel="noopener" class="oss-link">
+              <span class="oss-link__icon" aria-hidden="true">●</span> Инфостарт
+            </a>
+          </div>
+        </article>
+
+        <!-- ConfluenceMCP -->
+        <article class="oss-card oss-card--mint reveal" data-delay="600">
+          <div class="oss-card__accent"></div>
+          <div class="oss-card__header">
+            <div class="oss-card__icon">📘</div>
+            <div class="oss-card__title-wrap">
+              <h3 class="oss-card__title">ConfluenceMCP</h3>
+              <p class="oss-card__tagline">Умный поиск по корпоративной wiki через MCP</p>
+            </div>
+          </div>
+          <p class="oss-card__desc">
+            MCP-сервер, который даёт Claude доступ к Confluence — локальному или Atlassian Cloud. Запрос «как оформить звонок в директорат» находит статью со словом «принять» благодаря трём независимым механизмам умного поиска: score-merging, выделение существительных и опциональная LLM-переформулировка через любой OpenAI-совместимый endpoint.
+          </p>
+          <div class="oss-card__tags">
+            <span class="tech-badge">Python 3.10+</span>
+            <span class="tech-badge">MCP · SSE + Streamable-HTTP</span>
+            <span class="tech-badge">pymorphy3</span>
+            <span class="tech-badge">Confluence REST</span>
+            <span class="tech-badge">Basic Auth · API Token</span>
+            <span class="tech-badge">Docker</span>
+          </div>
+          <ul class="oss-card__features">
+            <li>Score-based ranking: страница, найдённая 5 вариантами запроса, ранжируется выше</li>
+            <li>Noun-only проход через pymorphy3 — убирает глагольный шум из запроса</li>
+            <li>LLM-rewrite: генерация синонимичных формулировок с тихим fallback при ошибке</li>
+            <li>6 инструментов: <code>search_content</code>, <code>search_by_cql</code>, <code>get_page_content</code>, <code>list_spaces</code>…</li>
+            <li>Работает с локальным Confluence и Atlassian Cloud, поднимается одним <code>docker compose up</code></li>
+          </ul>
+          <div class="oss-card__links">
+            <a href="https://github.com/ivanarama/ConfluenceMCP" target="_blank" rel="noopener" class="oss-link oss-link--primary">
+              <span class="oss-link__icon" aria-hidden="true">⌥</span> GitHub
+            </a>
+            <span class="oss-link oss-link--soon">
+              <span class="oss-link__icon" aria-hidden="true">▶</span> Видео · скоро
+            </span>
+            <span class="oss-link oss-link--soon">
+              <span class="oss-link__icon" aria-hidden="true">●</span> Статья · скоро
+            </span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Support -->
+  <section class="support-strip" id="support">
+    <div class="container">
+      <div class="support-strip__inner reveal">
+        <div class="support-strip__text">
+          <h3 class="support-strip__title">Поддержать проекты</h3>
+          <p class="support-strip__desc">Все инструменты бесплатны и open-source. Если оказались полезны — буду рад поддержке.</p>
+        </div>
+        <div class="support-strip__actions">
+          <a href="https://yoomoney.ru/to/41001428157040" target="_blank" rel="noopener" class="support-strip__btn support-strip__btn--ym">
+            💳 ЮMoney
+          </a>
+          <button class="support-strip__btn support-strip__btn--ton" onclick="navigator.clipboard.writeText('UQDmhcdNyqut5nE8K7yJCvXwNST2qMIBk5gRgFInpO7eBO-x').then(()=>{this.textContent='Скопировано ✓';setTimeout(()=>this.textContent='💎 TON / USDT',2000)})">
+            💎 TON / USDT
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -257,7 +534,10 @@
             <li><a href="#" class="contacts__social-link">YouTube</a></li>
           </ul>
         </div>
-        <form class="contacts__form reveal" data-delay="200" id="contactForm">
+        <form class="contacts__form reveal" data-delay="200" id="contactForm"
+              action="/api/contact" method="POST">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="form-honeypot" aria-hidden="true">
+
           <div class="form-group">
             <input type="text" name="name" class="form-input" placeholder="Имя" required>
           </div>
@@ -268,6 +548,7 @@
             <textarea name="message" class="form-input form-textarea" placeholder="Сообщение" rows="4" required></textarea>
           </div>
           <button type="submit" class="form-submit">Отправить</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </form>
       </div>
     </div>
