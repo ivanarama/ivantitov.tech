@@ -169,12 +169,25 @@
   <section class="container">
     <h2>Обитатели королевства</h2>
     <div class="units">
-      <a class="unit" href="dashboard.html"><img src="assets/unit_griffin.png" alt="Королевский Грифон"><span>Королевский Грифон</span><small>гордость казны</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_fairy_archer.png" alt="Лучницы-Феи"><span>Лучницы-Феи</span><small>роща фей</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_treant.png" alt="Древние Древни"><span>Древние Древни</span><small>хранители леса</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_wolf.png" alt="Лесные Волки"><span>Лесные Волки</span><small>стая чащи</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_goblin.png" alt="Гоблины-копейщики"><span>Гоблины-копейщики</span><small>засады</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_skeleton_archer.png" alt="Скелеты-лучники"><span>Скелеты-лучники</span><small>бездушный строй</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_royal_griffin.png" alt="Королевский Грифон"><span>Королевский Грифон</span><small>гвардия короны · Тир 3</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_griffin.png" alt="Грифон"><span>Грифон</span><small>гордость казны · Тир 3</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_royal_fairy.png" alt="Королевская Фея"><span>Королевская Фея</span><small>двойной выстрел · Тир 2</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_fairy_archer.png" alt="Феи-лучницы"><span>Фея-лучница</span><small>роща фей · Тир 2</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_pegasus.png" alt="Светлые Пегасы"><span>Светлый Пегас</span><small>крылатый перехват · Тир 3</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_unicorn.png" alt="Единороги"><span>Единорог</span><small>лунная поляна · Тир 4</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_druid.png" alt="Лесные Друиды"><span>Лесной Друид</span><small>молнии природы · Тир 3</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_treant.png" alt="Древни"><span>Древний Древень</span><small>хранитель леса · Тир 4</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_fox_shifter.png" alt="Лисы-Оборотни"><span>Лиса-Оборотень</span><small>дух чащи · Тир 2</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_wolf.png" alt="Лесные Волки"><span>Лесной Волк</span><small>стая чащи · Тир 1</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_stone_guardian.png" alt="Каменные Стражи"><span>Каменный Страж</span><small>древние обелиски · Тир 4</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_goblin.png" alt="Гоблины"><span>Гоблин-копейщик</span><small>лесные засады · Тир 1</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_skeleton_archer.png" alt="Скелеты-лучники"><span>Скелет-лучник</span><small>курганы нежити · Тир 1</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/medallion_swamp_zombie.png" alt="Болотные Зомби"><span>Болотный Зомби</span><small>тлетворный яд · Тир 2</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_lich.png" alt="Лич Некромант"><span>Лич Некромант</span><small>подъём мертвецов · Тир 5</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_lava_salamander.png" alt="Лавовые саламандры"><span>Лавовая Саламандра</span><small>огненный шип · Тир 2</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_magma_golem.png" alt="Магмовые големы"><span>Магмовый Голем</span><small>исполин магмы · Тир 4</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_red_dragon.png" alt="Красный Дракон"><span>Красный Дракон</span><small>огненная буря · Тир 7</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/medallion_bandit_chief.png" alt="Атаман Разбойников"><span>Атаман Разбойников</span><small>вожак ватаги · Босс</small></a>
     </div>
   </section>
 
@@ -227,9 +240,7 @@
     <h2>Предложить идею или баг 🛠</h2>
     <p class="form-note" style="margin-bottom:1.2rem;">Прежде чем попасть к Gemini, предложение пройдёт суд концепции —
       ламповой сказке без замков, крафта и мрачняка.</p>
-    <form action="https://formsubmit.co/taskivantitov@mail.ru" method="POST">
-      <input type="hidden" name="_subject" value="[KT] Предложение по игре">
-      <input type="hidden" name="_template" value="table">
+    <form id="suggestForm" action="/api/kt/suggest" method="POST">
       <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
       <input type="text" name="name" placeholder="Ник или имя" required>
       <select name="kind" required>
@@ -253,7 +264,7 @@
   </footer>
 
   <script>
-    const form = document.querySelector('form');
+    const form = document.getElementById('suggestForm') || document.querySelector('form');
     if (form) {
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -265,12 +276,13 @@
         const name = (form.name.value || '').trim();
         const kind = form.kind.value || 'идея';
         const msg = (form.message.value || '').trim();
+        const honey = (form._honey ? form._honey.value : '').trim();
         const subject = `[KT] ${name}: ${kind}`;
         const body = `Ник: ${name}\nЧто это: ${kind}\n\nПредложение:\n${msg}`;
 
         let sent = false;
         try {
-          const res = await fetch('https://formsubmit.co/ajax/taskivantitov@mail.ru', {
+          const res = await fetch('/api/kt/suggest', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -280,12 +292,12 @@
               name: name,
               kind: kind,
               message: msg,
-              _subject: subject
+              _honey: honey
             })
           });
           if (res.ok) {
             const data = await res.json();
-            if (data.success === 'true' || data.success === true) {
+            if (data.success === true || data.success === 'true') {
               sent = true;
             }
           }
@@ -295,9 +307,9 @@
 
         if (sent) {
           form.innerHTML = `
-            <div class="parchment" style="text-align:center; padding:2rem 1.2rem;">
-              <h3 style="color:var(--gold-bright); font-family:'Prata',serif; font-size:1.3rem; margin-bottom:.8rem;">📜 Свиток принят летописцем!</h3>
-              <p style="margin-bottom:1.2rem;">Ваше предложение дошло до конвейера. Оно пройдёт суд концепции и появится в <a href="dashboard.html" style="color:var(--gold-bright); font-weight:bold;">Книге Предложений</a>.</p>
+            <div class="parchment" style="text-align:center; padding:2.5rem 1.4rem; border:2px solid var(--gold); border-radius:8px;">
+              <h3 style="color:var(--gold-bright); font-family:'Prata',serif; font-size:1.4rem; margin-bottom:.8rem;">📜 Свиток принят летописцем!</h3>
+              <p style="margin-bottom:1.4rem; font-size:1.05rem;">Ваше предложение бережно передано конвейеру. В течение нескольких минут оно пройдёт суд концепции и появится в <a href="dashboard.html" style="color:var(--gold-bright); font-weight:bold; text-decoration:underline;">Книге Предложений</a>.</p>
               <a class="wood-btn" href="dashboard.html">Перейти в Книгу Предложений</a>
             </div>`;
         } else {
@@ -309,17 +321,16 @@
           const statusBox = document.getElementById('formStatus');
           statusBox.style.display = 'block';
           statusBox.className = 'parchment';
-          statusBox.style.cssText = 'display:block; margin-top:1.2rem; text-align:center; padding:1.4rem; border:1px solid var(--gold); border-radius:8px;';
+          statusBox.style.cssText = 'display:block; margin-top:1.2rem; text-align:center; padding:1.4rem; border:1px solid #d9534f; border-radius:8px;';
           statusBox.innerHTML = `
             <h4 style="color:#d9534f; margin-bottom:.5rem; font-family:'Prata',serif;">Почтовый голубь временно задерживается</h4>
-            <p style="font-size:.95rem; margin-bottom:1rem;">Сервис приёма веб-форм сейчас недоступен, но ваше обращение бережно сохранено! Отправьте его в один клик:</p>
+            <p style="font-size:.95rem; margin-bottom:1rem;">Прямая отправка сейчас недоступна, но ваше обращение сохранено! Отправьте его в один клик:</p>
             <div style="display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; margin-bottom:1rem;">
               <a class="wood-btn" href="${mailtoUrl}">✉ Отправить через почту</a>
               <a class="ghost-btn" href="${ghUrl}" target="_blank" rel="noopener" style="color:var(--gold-bright); border-color:var(--gold);">🐙 Создать GitHub Issue</a>
             </div>
-            <p style="font-size:.85rem; color:var(--ink-soft);">Или отправьте вручную на <b>taskivantitov@mail.ru</b> (в теме письма укажите <code>[KT]</code>).</p>
+            <p style="font-size:.85rem; color:var(--ink-soft);">Или отправьте письмо на <b>taskivantitov@mail.ru</b> (в теме укажите <code>[KT]</code>).</p>
           `;
-          window.location.href = mailtoUrl;
         }
       });
     }

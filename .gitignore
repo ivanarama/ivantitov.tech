@@ -13,3 +13,6 @@ Thumbs.db
 fromsite.txt
 *.tmp
 *.log
+
+# Local setup notes (содержит email — не коммитить)
+FORM_SETUP.md
