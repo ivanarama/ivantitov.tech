@@ -242,6 +242,8 @@
       <textarea name="message" rows="5" placeholder="Опиши предложение: что хочешь видеть в игре и почему это вписывается в ламповые сказки" required></textarea>
       <button class="wood-btn" type="submit" style="justify-self:center;">Отправить летописцу ✉</button>
       <p class="form-note">Судьба свитка появится в Книге Предложений.</p>
+      <p class="form-note" style="margin-top:.4rem; font-size:.85rem;">Или отправьте письмо напрямую на <a href="mailto:taskivantitov@mail.ru?subject=[KT]%20Предложение%20по%20игре" style="color:var(--gold-bright); text-decoration:underline;">taskivantitov@mail.ru</a> (в теме укажите <code>[KT]</code>).</p>
+      <div id="formStatus" style="display:none; margin-top:1rem;"></div>
     </form>
   </section>
 
@@ -249,5 +251,78 @@
     <p>«Сказки Королевства» · Godot 4.7 · <a href="/">ivantitov.tech</a> ·
        игра дописывается игроками и Gemini</p>
   </footer>
+
+  <script>
+    const form = document.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const origText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка свитка... ⌛';
+
+        const name = (form.name.value || '').trim();
+        const kind = form.kind.value || 'идея';
+        const msg = (form.message.value || '').trim();
+        const subject = `[KT] ${name}: ${kind}`;
+        const body = `Ник: ${name}\nЧто это: ${kind}\n\nПредложение:\n${msg}`;
+
+        let sent = false;
+        try {
+          const res = await fetch('https://formsubmit.co/ajax/taskivantitov@mail.ru', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              name: name,
+              kind: kind,
+              message: msg,
+              _subject: subject
+            })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.success === 'true' || data.success === true) {
+              sent = true;
+            }
+          }
+        } catch (err) {
+          sent = false;
+        }
+
+        if (sent) {
+          form.innerHTML = `
+            <div class="parchment" style="text-align:center; padding:2rem 1.2rem;">
+              <h3 style="color:var(--gold-bright); font-family:'Prata',serif; font-size:1.3rem; margin-bottom:.8rem;">📜 Свиток принят летописцем!</h3>
+              <p style="margin-bottom:1.2rem;">Ваше предложение дошло до конвейера. Оно пройдёт суд концепции и появится в <a href="dashboard.html" style="color:var(--gold-bright); font-weight:bold;">Книге Предложений</a>.</p>
+              <a class="wood-btn" href="dashboard.html">Перейти в Книгу Предложений</a>
+            </div>`;
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.textContent = origText;
+          const mailtoUrl = `mailto:taskivantitov@mail.ru?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          const ghUrl = `https://github.com/ivanarama/kingdom-tales-rpg/issues/new?title=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+          const statusBox = document.getElementById('formStatus');
+          statusBox.style.display = 'block';
+          statusBox.className = 'parchment';
+          statusBox.style.cssText = 'display:block; margin-top:1.2rem; text-align:center; padding:1.4rem; border:1px solid var(--gold); border-radius:8px;';
+          statusBox.innerHTML = `
+            <h4 style="color:#d9534f; margin-bottom:.5rem; font-family:'Prata',serif;">Почтовый голубь временно задерживается</h4>
+            <p style="font-size:.95rem; margin-bottom:1rem;">Сервис приёма веб-форм сейчас недоступен, но ваше обращение бережно сохранено! Отправьте его в один клик:</p>
+            <div style="display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; margin-bottom:1rem;">
+              <a class="wood-btn" href="${mailtoUrl}">✉ Отправить через почту</a>
+              <a class="ghost-btn" href="${ghUrl}" target="_blank" rel="noopener" style="color:var(--gold-bright); border-color:var(--gold);">🐙 Создать GitHub Issue</a>
+            </div>
+            <p style="font-size:.85rem; color:var(--ink-soft);">Или отправьте вручную на <b>taskivantitov@mail.ru</b> (в теме письма укажите <code>[KT]</code>).</p>
+          `;
+          window.location.href = mailtoUrl;
+        }
+      });
+    }
+  </script>
 </body>
 </html>
