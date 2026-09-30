@@ -91,17 +91,35 @@
       padding: 1.6rem 1.8rem; border-radius: 6px;
       box-shadow: 0 8px 26px rgba(0,0,0,.55);
     }
+    .biome-tabs {
+      display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin-bottom: 1.4rem;
+    }
+    .biome-tab {
+      background: rgba(20, 15, 10, 0.75); color: var(--gold);
+      border: 1px solid rgba(218, 165, 32, 0.45); border-radius: 20px;
+      padding: .42rem 1.15rem; font-family: 'PT Serif', serif; font-size: .92rem;
+      cursor: pointer; transition: all .18s ease; user-select: none;
+    }
+    .biome-tab:hover {
+      border-color: var(--gold-bright); color: var(--gold-bright);
+      background: rgba(218, 165, 32, 0.18); transform: translateY(-1px);
+    }
+    .biome-tab.active {
+      background: var(--gold); color: #1a0f05; font-weight: 700;
+      border-color: var(--gold-bright); box-shadow: 0 4px 14px rgba(218, 165, 32, 0.35);
+    }
     .units { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
     .unit {
       text-align: center; text-decoration: none; color: var(--ink);
       background: var(--parchment) url("assets/parchment_panel.png") center / 100% 100% no-repeat;
       border-radius: 6px; overflow: hidden; padding-bottom: .5rem;
-      box-shadow: 0 6px 18px rgba(0,0,0,.5); transition: transform .15s;
+      box-shadow: 0 6px 18px rgba(0,0,0,.5); transition: transform .15s, opacity .2s;
     }
     .unit:hover { transform: translateY(-3px) rotate(-.4deg); }
     .unit img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; background: #000; }
     .unit span { display: block; padding: .45rem .4rem 0; font-size: .92rem; font-weight: 700; }
     .unit small { color: var(--ink-soft); font-size: .8rem; font-style: italic; }
+    .unit.hidden { display: none; }
 
     .pipeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.1rem; counter-reset: step; }
     .pipeline .parchment { position: relative; padding-left: 4rem; counter-increment: step; }
@@ -166,28 +184,39 @@
     </div>
   </header>
 
-  <section class="container">
+  <section class="container" id="bestiary">
     <h2>Обитатели королевства</h2>
+    <div class="biome-tabs">
+      <button class="biome-tab active" data-filter="grove" type="button">🌲 Роща и Альянс (10)</button>
+      <button class="biome-tab" data-filter="peaks" type="button">🌋 Огненные Пики (4)</button>
+      <button class="biome-tab" data-filter="swamp" type="button">💀 Топи и Тени (5)</button>
+      <button class="biome-tab" data-filter="all" type="button">✨ Все существа (19)</button>
+    </div>
     <div class="units">
-      <a class="unit" href="dashboard.html"><img src="assets/unit_royal_griffin.png" alt="Королевский Грифон"><span>Королевский Грифон</span><small>гвардия короны · Тир 3</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_griffin.png" alt="Грифон"><span>Грифон</span><small>гордость казны · Тир 3</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_royal_fairy.png" alt="Королевская Фея"><span>Королевская Фея</span><small>двойной выстрел · Тир 2</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_fairy_archer.png" alt="Феи-лучницы"><span>Фея-лучница</span><small>роща фей · Тир 2</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_pegasus.png" alt="Светлые Пегасы"><span>Светлый Пегас</span><small>крылатый перехват · Тир 3</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_unicorn.png" alt="Единороги"><span>Единорог</span><small>лунная поляна · Тир 4</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_druid.png" alt="Лесные Друиды"><span>Лесной Друид</span><small>молнии природы · Тир 3</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_treant.png" alt="Древни"><span>Древний Древень</span><small>хранитель леса · Тир 4</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_fox_shifter.png" alt="Лисы-Оборотни"><span>Лиса-Оборотень</span><small>дух чащи · Тир 2</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_wolf.png" alt="Лесные Волки"><span>Лесной Волк</span><small>стая чащи · Тир 1</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_stone_guardian.png" alt="Каменные Стражи"><span>Каменный Страж</span><small>древние обелиски · Тир 4</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_goblin.png" alt="Гоблины"><span>Гоблин-копейщик</span><small>лесные засады · Тир 1</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_skeleton_archer.png" alt="Скелеты-лучники"><span>Скелет-лучник</span><small>курганы нежити · Тир 1</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/medallion_swamp_zombie.png" alt="Болотные Зомби"><span>Болотный Зомби</span><small>тлетворный яд · Тир 2</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_lich.png" alt="Лич Некромант"><span>Лич Некромант</span><small>подъём мертвецов · Тир 5</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_lava_salamander.png" alt="Лавовые саламандры"><span>Лавовая Саламандра</span><small>огненный шип · Тир 2</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_magma_golem.png" alt="Магмовые големы"><span>Магмовый Голем</span><small>исполин магмы · Тир 4</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/unit_red_dragon.png" alt="Красный Дракон"><span>Красный Дракон</span><small>огненная буря · Тир 7</small></a>
-      <a class="unit" href="dashboard.html"><img src="assets/medallion_bandit_chief.png" alt="Атаман Разбойников"><span>Атаман Разбойников</span><small>вожак ватаги · Босс</small></a>
+      <!-- 🌲 Роща и Альянс -->
+      <a class="unit" data-biome="grove" href="dashboard.html"><img src="assets/unit_royal_griffin.webp" alt="Королевский Грифон" loading="lazy" width="200" height="200"><span>Королевский Грифон</span><small>гвардия короны · Тир 3</small></a>
+      <a class="unit" data-biome="grove" href="dashboard.html"><img src="assets/unit_griffin.webp" alt="Грифон" loading="lazy" width="200" height="200"><span>Грифон</span><small>гордость казны · Тир 3</small></a>
+      <a class="unit" data-biome="grove" href="dashboard.html"><img src="assets/unit_royal_fairy.webp" alt="Королевская Фея" loading="lazy" width="200" height="200"><span>Королевская Фея</span><small>двойной выстрел · Тир 2</small></a>
+      <a class="unit" data-biome="grove" href="dashboard.html"><img src="assets/unit_fairy_archer.webp" alt="Феи-лучницы" loading="lazy" width="200" height="200"><span>Фея-лучница</span><small>роща фей · Тир 2</small></a>
+      <a class="unit" data-biome="grove" href="dashboard.html"><img src="assets/unit_pegasus.webp" alt="Светлые Пегасы" loading="lazy" width="200" height="200"><span>Светлый Пегас</span><small>крылатый перехват · Тир 3</small></a>
+      <a class="unit" data-biome="grove" href="dashboard.html"><img src="assets/unit_unicorn.webp" alt="Единороги" loading="lazy" width="200" height="200"><span>Единорог</span><small>лунная поляна · Тир 4</small></a>
+      <a class="unit" data-biome="grove" href="dashboard.html"><img src="assets/unit_druid.webp" alt="Лесные Друиды" loading="lazy" width="200" height="200"><span>Лесной Друид</span><small>молнии природы · Тир 3</small></a>
+      <a class="unit" data-biome="grove" href="dashboard.html"><img src="assets/unit_treant.webp" alt="Древни" loading="lazy" width="200" height="200"><span>Древний Древень</span><small>хранитель леса · Тир 4</small></a>
+      <a class="unit" data-biome="grove" href="dashboard.html"><img src="assets/unit_fox_shifter.webp" alt="Лисы-Оборотни" loading="lazy" width="200" height="200"><span>Лиса-Оборотень</span><small>дух чащи · Тир 2</small></a>
+      <a class="unit" data-biome="grove" href="dashboard.html"><img src="assets/unit_wolf.webp" alt="Лесные Волки" loading="lazy" width="200" height="200"><span>Лесной Волк</span><small>стая чащи · Тир 1</small></a>
+
+      <!-- 🌋 Огненные Пики -->
+      <a class="unit hidden" data-biome="peaks" href="dashboard.html"><img src="assets/unit_red_dragon.webp" alt="Красный Дракон" loading="lazy" width="200" height="200"><span>Красный Дракон</span><small>огненная буря · Тир 7</small></a>
+      <a class="unit hidden" data-biome="peaks" href="dashboard.html"><img src="assets/unit_magma_golem.webp" alt="Магмовые големы" loading="lazy" width="200" height="200"><span>Магмовый Голем</span><small>исполин магмы · Тир 4</small></a>
+      <a class="unit hidden" data-biome="peaks" href="dashboard.html"><img src="assets/unit_lava_salamander.webp" alt="Лавовые саламандры" loading="lazy" width="200" height="200"><span>Лавовая Саламандра</span><small>огненный шип · Тир 2</small></a>
+      <a class="unit hidden" data-biome="peaks" href="dashboard.html"><img src="assets/unit_stone_guardian.webp" alt="Каменные Стражи" loading="lazy" width="200" height="200"><span>Каменный Страж</span><small>древние обелиски · Тир 4</small></a>
+
+      <!-- 💀 Топи и Тени -->
+      <a class="unit hidden" data-biome="swamp" href="dashboard.html"><img src="assets/unit_lich.webp" alt="Лич Некромант" loading="lazy" width="200" height="200"><span>Лич Некромант</span><small>подъём мертвецов · Тир 5</small></a>
+      <a class="unit hidden" data-biome="swamp" href="dashboard.html"><img src="assets/medallion_swamp_zombie.webp" alt="Болотные Зомби" loading="lazy" width="200" height="200"><span>Болотный Зомби</span><small>тлетворный яд · Тир 2</small></a>
+      <a class="unit hidden" data-biome="swamp" href="dashboard.html"><img src="assets/unit_skeleton_archer.webp" alt="Скелеты-лучники" loading="lazy" width="200" height="200"><span>Скелет-лучник</span><small>курганы нежити · Тир 1</small></a>
+      <a class="unit hidden" data-biome="swamp" href="dashboard.html"><img src="assets/unit_goblin.webp" alt="Гоблины" loading="lazy" width="200" height="200"><span>Гоблин-копейщик</span><small>лесные засады · Тир 1</small></a>
+      <a class="unit hidden" data-biome="swamp" href="dashboard.html"><img src="assets/medallion_bandit_chief.webp" alt="Атаман Разбойников" loading="lazy" width="200" height="200"><span>Атаман Разбойников</span><small>вожак ватаги · Босс</small></a>
     </div>
   </section>
 
@@ -334,6 +363,22 @@
         }
       });
     }
+
+    // Biome filter tabs for creature bestiary
+    document.querySelectorAll('.biome-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.biome-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        document.querySelectorAll('.unit').forEach(unit => {
+          if (filter === 'all' || unit.dataset.biome === filter) {
+            unit.classList.remove('hidden');
+          } else {
+            unit.classList.add('hidden');
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>
