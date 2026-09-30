@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Книга Предложений — Сказки Королевства</title>
+  <meta name="description" content="Летопись предложений игроков: каждое желание проходит суд концепции, реализацию и попадает в релиз.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prata&family=Alegreya:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #4a3b1f;
+      --ink-soft: #7a6540;
+      --gold: #b8860b;
+      --gold-bright: #d4a017;
+      --leather: #241a10;
+      --leather-2: #31241536;
+      --parchment: #f0e4c4;
+      --parchment-2: #e8d9b0;
+    }
+    html { background: #120c06; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(212,160,23,.08), transparent 60%),
+        radial-gradient(ellipse at 50% 100%, rgba(0,0,0,.6), transparent 70%),
+        linear-gradient(160deg, #2b1f12, #1a120a 60%, #120c06);
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: 'Alegreya', Georgia, serif;
+      font-size: 16px;
+    }
+    .top { text-align: center; padding: 2rem 1rem 1rem; position: relative; }
+    .top h1 {
+      font-family: 'Prata', serif; font-weight: 400;
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      color: var(--gold-bright);
+      text-shadow: 0 2px 20px rgba(0,0,0,.8);
+      letter-spacing: .04em;
+    }
+    .top .subtitle { color: #c9b98f; font-style: italic; margin-top: .4rem; }
+    .top a.back {
+      position: absolute; left: 1.2rem; top: 1.4rem;
+      color: #c9b98f; text-decoration: none; font-style: italic; font-size: .92rem;
+    }
+    .top a.back:hover { color: var(--gold-bright); }
+    .toolbar { text-align: center; margin: 1rem 0 1.4rem; }
+    .wood-btn {
+      display: inline-block; cursor: pointer; border: none;
+      font-family: 'Alegreya', serif; font-size: 1rem; font-weight: 700;
+      color: #f5e7c8; text-shadow: 0 1px 2px rgba(0,0,0,.8);
+      padding: .55rem 1.6rem; border-radius: 8px;
+      background: url("assets/btn_wood_normal.png") center / 100% 100% no-repeat;
+      transition: filter .15s, transform .15s;
+    }
+    .wood-btn:hover { background-image: url("assets/btn_wood_hover.png"); transform: translateY(-1px); }
+    .book {
+      max-width: 1400px; margin: 0 auto 3rem; padding: 0 1rem;
+    }
+    .spread {
+      display: grid; grid-auto-flow: column; grid-auto-columns: minmax(240px, 1fr);
+      gap: 1.1rem; align-items: start; overflow-x: auto; padding: 1.4rem;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.55), transparent 6%, transparent 94%, rgba(0,0,0,.55)),
+        linear-gradient(180deg, #241a10, #1c130b);
+      border-block: 3px double var(--gold);
+      border-radius: 8px;
+      box-shadow: inset 0 0 60px rgba(0,0,0,.6), 0 20px 60px rgba(0,0,0,.7);
+    }
+    body.fullscreen .book { position: fixed; inset: 0; z-index: 50; max-width: none; margin: 0; padding: .6rem; background: inherit; }
+    body.fullscreen .spread { max-height: calc(100vh - 5.5rem); padding-top: 3.2rem; }
+    body.fullscreen .top, body.fullscreen .toolbar { display: none; }
+    .close-book {
+      display: none; position: fixed; top: 12px; right: 16px; z-index: 60;
+      cursor: pointer; border: 1px solid rgba(212,160,23,.55); border-radius: 8px;
+      background: rgba(20,14,8,.85); color: var(--gold-bright);
+      font-family: 'Alegreya', serif; font-size: .95rem; font-weight: 700;
+      padding: .45rem 1.1rem;
+    }
+    .close-book:hover { background: rgba(40,28,14,.95); }
+    body.fullscreen .close-book { display: block; }
+    body.fullscreen .toolbar { margin: .8rem 0 1rem; }
+
+    .col-head {
+      font-family: 'Prata', serif; text-align: center; margin-bottom: .9rem;
+      color: var(--gold-bright); font-size: 1.05rem; letter-spacing: .03em;
+    }
+    .col-head small { display: block; font-family: 'Alegreya', serif; font-style: italic; color: #a89565; font-size: .8rem; }
+    .col-count { display: inline-block; min-width: 1.6em; padding: 0 .35em; margin-left: .3em;
+      border: 1px solid rgba(212,160,23,.5); border-radius: 999px; font-size: .85em; }
+
+    .scroll-card {
+      position: relative; margin-bottom: 1rem; cursor: pointer;
+      background: var(--parchment) url("assets/parchment_panel.png") center / 100% 100% no-repeat;
+      padding: .9rem 1.1rem; border-radius: 6px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.55);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .scroll-card:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(0,0,0,.65); }
+    .scroll-card.rejected { filter: saturate(.55); opacity: .85; }
+    .scroll-card h3 {
+      font-family: 'Prata', serif; font-weight: 400; font-size: .98rem;
+      line-height: 1.35; color: var(--ink); margin-bottom: .35rem;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .chip {
+      font-size: .72rem; font-family: 'Alegreya', serif;
+      border: 1px solid rgba(122,101,64,.45); border-radius: 999px;
+      padding: 0 .55em; color: var(--ink-soft); background: rgba(255,250,230,.4);
+    }
+    .chip.author { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .more-hint { font-size: .78rem; color: var(--gold); font-style: italic; margin-top: .4rem; }
+    .details { display: none; }
+    .scroll-card.open .details { display: block; }
+    .scroll-card.open .more-hint::after { content: " ↑"; }
+
+    /* --- Модальный разворот свитка по центру экрана --- */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 70;
+      background: rgba(8,5,2,.72); backdrop-filter: blur(2px);
+      display: none; align-items: flex-start; justify-content: center;
+      padding: 4vh 1.5rem; overflow-y: auto;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-scroll {
+      position: relative; width: min(760px, 100%);
+      margin: auto; cursor: default;
+      background: var(--parchment) url("assets/parchment_panel.png") center / 100% 100% no-repeat;
+      border-radius: 6px; padding: 2.2rem 2.4rem 1.8rem;
+      box-shadow: 0 30px 90px rgba(0,0,0,.85), 0 0 0 1px rgba(212,160,23,.4);
+      animation: unroll .22s ease-out;
+    }
+    @keyframes unroll { from { transform: scaleY(.75); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+    .modal-scroll h3 {
+      font-family: 'Prata', serif; font-weight: 400; font-size: 1.25rem;
+      color: var(--ink); margin-bottom: .7rem; padding-right: 2.4rem;
+    }
+    .modal-close {
+      position: absolute; top: .9rem; right: 1rem; cursor: pointer;
+      border: none; background: rgba(122,101,64,.15); color: var(--ink);
+      width: 2rem; height: 2rem; border-radius: 50%;
+      font-family: 'Prata', serif; font-size: 1rem;
+    }
+    .modal-close:hover { background: rgba(122,101,64,.3); }
+    .details .verdict { font-weight: 700; }
+    .details .verdict.reject { color: #8b2500; }
+    .details .verdict.accept { color: #2e5d34; }
+    .details p { font-size: .88rem; margin: .35rem 0; }
+    .details .spec {
+      white-space: pre-wrap; font-size: .8rem; line-height: 1.5;
+      color: var(--ink); background: rgba(255,252,240,.5);
+      border: 1px solid rgba(122,101,64,.3); border-radius: 6px;
+      padding: .6rem .8rem; margin-top: .5rem; max-height: 300px; overflow-y: auto;
+    }
+    .empty-note { text-align: center; color: #a89565; font-style: italic; padding: 1.4rem .6rem; font-size: .9rem; }
+    .toolbar-note { text-align: center; color: #a89565; font-style: italic; font-size: .85rem; margin-bottom: .8rem; }
+    @media (max-width: 760px) {
+      .spread { grid-auto-flow: row; grid-auto-columns: auto; overflow-x: visible; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <a class="back" href="index.html">← к игре</a>
+    <h1>📜 Книга Предложений</h1>
+    <p class="subtitle">летопись того, как желания игроков становятся магией королевства</p>
+  </div>
+
+  <div class="toolbar">
+    <button class="wood-btn" id="expandBtn" type="button">📖 Развернуть книгу во весь экран</button>
+  </div>
+  <button class="close-book" id="closeBtn" type="button">✕ Свернуть книгу (Esc)</button>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal-scroll" id="modalScroll"></div>
+  </div>
+  <p class="toolbar-note">коснись свитка — и он развернётся: вердикт хранителя, причина и задание для волшебницы Gemini</p>
+
+  <div class="book">
+    <div class="spread" id="board">
+      <div class="column" data-stage="триаж">
+        <div class="col-head">🗺 Подано<small>ждёт суда концепции</small></div>
+        <div class="col-cards"></div>
+      </div>
+      <div class="column" data-stage="принято">
+        <div class="col-head">✅ Принято<small>войдёт в игру</small></div>
+        <div class="col-cards"></div>
+      </div>
+      <div class="column" data-stage="в работе">
+        <div class="col-head">🔨 В работе<small>Gemini за пером</small></div>
+        <div class="col-cards"></div>
+      </div>
+      <div class="column" data-stage="в релизе">
+        <div class="col-head">📜 В релизе<small>дошло до игроков</small></div>
+        <div class="col-cards"></div>
+      </div>
+      <div class="column" data-stage="отклонено">
+        <div class="col-head">🚫 Отклонено<small>не в ладах с концепцией</small></div>
+        <div class="col-cards"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STAGE_OF = item => {
+      const v = (item.verdict || "").toUpperCase();
+      const s = item.stage || "";
+      if (s.startsWith("в релизе")) return "в релизе";
+      if (s === "в работе") return "в работе";
+      if (v === "ПРИНЯТЬ") return "принято";
+      if (v.startsWith("ОТКЛОНИТЬ")) return "отклонено";
+      if (v === "УТОЧНИТЬ") return "принято";
+      return "триаж";
+    };
+
+    let feedItems = [];
+
+    function openScroll(item) {
+      const verdict = (item.verdict || "").toUpperCase();
+      const vcls = verdict.startsWith("ОТКЛОНИТЬ") ? "reject" : "accept";
+      document.getElementById("modalScroll").innerHTML = `
+        <button class="modal-close" id="modalClose" title="Свернуть свиток (Esc)">✕</button>
+        <h3>${(item.title || (item.subject || "").replace(/^\[KT\]\s*/i, "")).replace(/</g, "&lt;")}</h3>
+        <div class="chips">
+          <span class="chip">📜 ${item.stage || "триаж"}</span>
+          ${item.category ? '<span class="chip">🖋 ' + item.category + "</span>" : ""}
+          ${item.priority ? '<span class="chip">⚖ приоритет ' + item.priority + "</span>" : ""}
+          <span class="chip author">✍ ${item.author || "Анонимный странник"}</span>
+        </div>
+        <div class="details" style="display:block; margin-top:.9rem;">
+          <p class="verdict ${vcls}">${verdict.startsWith("ОТКЛОНИТЬ") ? "🚫" : "✅"} ${item.verdict || ""}</p>
+          ${item.reason ? `<p>${item.reason}</p>` : ""}
+          ${item.spec ? `<div class="spec">${item.spec.replace(/\[([^\]]+)\]\(file:\/\/\/[^)]+\)/g, "$1").replace(/</g, "&lt;")}</div>` : ""}
+        </div>`;
+      document.getElementById("modalBackdrop").classList.add("open");
+      document.getElementById("modalClose").onclick = closeScroll;
+      history.replaceState(null, "", "#s" + item.task_id);
+    }
+
+    function closeScroll() {
+      document.getElementById("modalBackdrop").classList.remove("open");
+      history.replaceState(null, "", location.pathname + (document.body.classList.contains("fullscreen") ? "#full" : ""));
+    }
+
+    function cardHTML(item) {
+      const chips = [];
+      if (item.category) chips.push("🖋 " + item.category);
+      if (item.priority) chips.push("⚖ приоритет " + item.priority);
+      chips.push('<span class="chip author">✍ ' + (item.author || "Анонимный странник") + "</span>");
+      const verdict = (item.verdict || "").toUpperCase();
+      return `
+        <div class="scroll-card${verdict.startsWith("ОТКЛОНИТЬ") ? " rejected" : ""}" data-task="${item.task_id}">
+          <h3>${(item.title || (item.subject || "").replace(/^\[KT\]\s*/i, "")).replace(/</g, "&lt;")}</h3>
+          <div class="chips">${chips.join("")}</div>
+          <div class="more-hint">развернуть свиток</div>
+        </div>`;
+    }
+
+    async function loadBoard() {
+      let feed;
+      try {
+        const r = await fetch("feed.json", {cache: "no-store"});
+        feed = r.ok ? await r.json() : null;
+      } catch (e) { feed = null; }
+      const columns = {};
+      document.querySelectorAll(".column").forEach(col => {
+        const box = col.querySelector(".col-cards");
+        box.innerHTML = "";
+        columns[col.dataset.stage] = {box, count: 0};
+      });
+      (feed?.items || []).forEach(item => {
+        feedItems.push(item);
+        const stage = STAGE_OF(item);
+        if (columns[stage]) {
+          columns[stage].box.insertAdjacentHTML("beforeend", cardHTML(item));
+          columns[stage].count += 1;
+        }
+      });
+      Object.entries(columns).forEach(([stage, col]) => {
+        if (!col.count) col.box.innerHTML = '<div class="empty-note">пока пусто…</div>';
+        const head = document.querySelector(`.column[data-stage="${stage}"] .col-head .col-count`);
+        if (head) head.textContent = col.count;
+      });
+      document.querySelectorAll(".scroll-card").forEach(card => {
+        card.addEventListener("click", () => {
+          const item = feedItems.find(x => String(x.task_id) === card.dataset.task);
+          if (item) openScroll(item);
+        });
+      });
+      const deep = (location.hash.match(/^#s(\d+)$/) || [])[1];
+      if (deep) {
+        const item = feedItems.find(x => String(x.task_id) === deep);
+        if (item) openScroll(item);
+      }
+    }
+
+    const backdrop = document.getElementById("modalBackdrop");
+    backdrop.addEventListener("click", e => {
+      if (e.target === backdrop) closeScroll();
+    });
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        if (document.getElementById("modalBackdrop").classList.contains("open")) closeScroll();
+        else if (document.body.classList.contains("fullscreen")) setFullscreen(false);
+      }
+    });
+
+    function setFullscreen(on) {
+      document.body.classList.toggle("fullscreen", on);
+      document.getElementById("expandBtn").textContent =
+        on ? "📕 Свернуть книгу" : "📖 Развернуть книгу во весь экран";
+    }
+
+    document.getElementById("expandBtn").addEventListener("click", () => {
+      setFullscreen(!document.body.classList.contains("fullscreen"));
+    });
+    document.getElementById("closeBtn").addEventListener("click", () => setFullscreen(false));
+
+    loadBoard();
+    setInterval(loadBoard, 60000);
+    if (location.hash === "#full") setFullscreen(true);
+  </script>
+</body>
+</html>

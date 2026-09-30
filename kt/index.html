@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сказки Королевства — ламповая пошаговая RPG | ivantitov.tech</title>
+  <meta name="description" content="«Сказки Королевства» — самопишущаяся ламповая пошаговая тактическая RPG в духе King's Bounty и HoMM3. Игроки предлагают — Gemini пишет — конвейер проверяет и выпускает версии.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prata&family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #4a3b1f; --ink-soft: #7a6540;
+      --gold: #b8860b; --gold-bright: #d4a017;
+      --parchment: #f0e4c4;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(212,160,23,.09), transparent 55%),
+        radial-gradient(ellipse at 50% 100%, rgba(0,0,0,.6), transparent 70%),
+        linear-gradient(160deg, #2b1f12, #1a120a 60%, #120c06);
+      color: var(--ink); font-family: 'Alegreya', Georgia, serif; font-size: 17px;
+      line-height: 1.65; overflow-x: hidden;
+    }
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+    nav { padding: 1.1rem 0; position: relative; z-index: 3; }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Prata', serif; text-decoration: none; color: #e8d9b0; font-size: 1rem; }
+    .logo:hover { color: var(--gold-bright); }
+
+    .hero {
+      position: relative; text-align: center; padding: 5.5rem 0 4.5rem;
+      background: url("assets/menu_bg.jpg") center 30% / cover no-repeat;
+      border-bottom: 3px double var(--gold);
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(10,8,4,.5), rgba(10,8,4,.2) 45%, rgba(18,12,6,.96) 100%);
+    }
+    .hero > * { position: relative; z-index: 2; }
+    .hero .badge {
+      display: inline-block; font-size: .8rem; letter-spacing: .08em;
+      color: var(--gold-bright); border: 1px solid rgba(212,160,23,.55);
+      border-radius: 999px; padding: .3rem 1.2rem; margin-bottom: 1.3rem;
+      background: rgba(10,8,4,.55); font-family: 'Prata', serif;
+    }
+    h1 {
+      font-family: 'Prata', serif; font-weight: 400;
+      font-size: clamp(2.2rem, 7vw, 4rem); line-height: 1.14;
+      text-shadow: 0 4px 40px rgba(0,0,0,.85);
+      background: linear-gradient(120deg, #ffe08a, #ffb45c 55%, #ff8a3d);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .tagline {
+      color: #efe4c8; text-shadow: 0 2px 18px rgba(0,0,0,.9);
+      font-size: 1.18rem; margin: 1.3rem auto 2.1rem; max-width: 46rem;
+    }
+    .tagline b { color: var(--gold-bright); }
+    .cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .wood-btn {
+      display: inline-block; cursor: pointer; text-decoration: none;
+      font-family: 'Alegreya', serif; font-size: 1.05rem; font-weight: 700;
+      color: #f5e7c8; text-shadow: 0 1px 2px rgba(0,0,0,.8);
+      padding: .7rem 1.7rem; border-radius: 8px; border: none;
+      background: url("assets/btn_wood_normal.png") center / 100% 100% no-repeat;
+      transition: filter .15s, transform .15s;
+    }
+    .wood-btn:hover { background-image: url("assets/btn_wood_hover.png"); transform: translateY(-2px); }
+    .ghost-btn {
+      display: inline-block; text-decoration: none; font-weight: 700;
+      padding: .7rem 1.7rem; border-radius: 8px;
+      border: 1px solid rgba(232,217,176,.45); color: #efe4c8;
+      transition: transform .15s, border-color .15s;
+    }
+    .ghost-btn:hover { transform: translateY(-2px); border-color: var(--gold-bright); }
+
+    section { padding: var(--space, 3.2rem) 0; }
+    h2 {
+      font-family: 'Prata', serif; font-weight: 400; font-size: 1.7rem;
+      text-align: center; color: var(--gold-bright); margin-bottom: 1.6rem;
+      letter-spacing: .03em;
+    }
+    h2::after {
+      content: "❧"; display: block; font-size: 1.1rem;
+      color: var(--gold); margin-top: .3rem;
+    }
+    .parchment {
+      background: var(--parchment) url("assets/parchment_panel.png") center / 100% 100% no-repeat;
+      padding: 1.6rem 1.8rem; border-radius: 6px;
+      box-shadow: 0 8px 26px rgba(0,0,0,.55);
+    }
+    .units { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+    .unit {
+      text-align: center; text-decoration: none; color: var(--ink);
+      background: var(--parchment) url("assets/parchment_panel.png") center / 100% 100% no-repeat;
+      border-radius: 6px; overflow: hidden; padding-bottom: .5rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,.5); transition: transform .15s;
+    }
+    .unit:hover { transform: translateY(-3px) rotate(-.4deg); }
+    .unit img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; background: #000; }
+    .unit span { display: block; padding: .45rem .4rem 0; font-size: .92rem; font-weight: 700; }
+    .unit small { color: var(--ink-soft); font-size: .8rem; font-style: italic; }
+
+    .pipeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.1rem; counter-reset: step; }
+    .pipeline .parchment { position: relative; padding-left: 4rem; counter-increment: step; }
+    .pipeline .parchment::before {
+      content: counter(step); position: absolute; left: 1.2rem; top: 1.5rem;
+      width: 1.9rem; height: 1.9rem; border-radius: 50%;
+      display: grid; place-items: center;
+      background: rgba(184,134,11,.2); color: var(--gold);
+      font-family: 'Prata', serif; font-size: 1.05rem;
+    }
+    .pipeline h3 { font-family: 'Prata', serif; font-weight: 400; font-size: 1.08rem; margin-bottom: .5rem; }
+    .pipeline p { font-size: .96rem; }
+    .how-link { text-align: center; margin-top: 1.4rem; font-size: 1.05rem; }
+    .how-link a { color: var(--gold); text-decoration: none; border-bottom: 1px dashed var(--gold); }
+    .how-link a:hover { color: var(--gold-bright); }
+
+    .book-cta { text-align: center; }
+    .book-cta p { max-width: 40rem; margin: 0 auto 1.6rem; font-size: 1.08rem; font-style: italic; }
+
+    .changelog { font-size: .98rem; }
+    .changelog .ver { font-family: 'Prata', serif; color: var(--gold); }
+    .changelog li { list-style: none; margin: .35rem 0; }
+    .changelog li::before { content: "❖ "; color: var(--gold); }
+
+    form { display: grid; gap: .8rem; max-width: 34rem; margin: 0 auto; }
+    input, textarea, select {
+      background: rgba(255,252,240,.6); color: var(--ink);
+      border: 1px solid rgba(122,101,64,.5); border-radius: 8px;
+      padding: .75rem 1rem; font-family: 'Alegreya', serif; font-size: 1rem;
+    }
+    input:focus, textarea:focus, select:focus { outline: 1.5px solid var(--gold); }
+    .form-note { text-align: center; color: var(--ink-soft); font-size: .88rem; font-style: italic; }
+    footer {
+      text-align: center; color: #a89565; font-size: .88rem;
+      padding: 2.2rem 0 3rem; border-top: 3px double var(--gold); margin-top: 3rem;
+    }
+    footer a { color: var(--gold-bright); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a class="logo" href="/">← ivantitov.tech</a>
+      <a class="logo" href="dashboard.html">📜 Книга Предложений</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <span class="badge">✦ САМОПИШУЩАЯСЯ ИГРА · v0.1.0 ✦</span>
+      <h1>Сказки Королевства</h1>
+      <p class="tagline">Ламповая пошаговая тактическая RPG в духе King's Bounty и Heroes of Might
+        and Magic III — без замков и рутины строительства. Игра, которую <b>дописывают её игроки</b>:
+        вы предлагаете — Gemini пишет — конвейер проверяет и выпускает новую версию.</p>
+      <div class="cta-row">
+        <a class="wood-btn" href="https://github.com/ivanarama/kingdom-tales-rpg/releases/latest"
+           target="_blank" rel="noopener">📥 Скачать APK (Android)</a>
+        <a class="ghost-btn" href="https://github.com/ivanarama/kingdom-tales-rpg"
+           target="_blank" rel="noopener">Исходники</a>
+        <a class="ghost-btn" href="dashboard.html">📜 Книга Предложений</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="container">
+    <h2>Обитатели королевства</h2>
+    <div class="units">
+      <a class="unit" href="dashboard.html"><img src="assets/unit_griffin.png" alt="Королевский Грифон"><span>Королевский Грифон</span><small>гордость казны</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_fairy_archer.png" alt="Лучницы-Феи"><span>Лучницы-Феи</span><small>роща фей</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_treant.png" alt="Древние Древни"><span>Древние Древни</span><small>хранители леса</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_wolf.png" alt="Лесные Волки"><span>Лесные Волки</span><small>стая чащи</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_goblin.png" alt="Гоблины-копейщики"><span>Гоблины-копейщики</span><small>засады</small></a>
+      <a class="unit" href="dashboard.html"><img src="assets/unit_skeleton_archer.png" alt="Скелеты-лучники"><span>Скелеты-лучники</span><small>бездушный строй</small></a>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>Дух игры</h2>
+    <div class="parchment" style="max-width:46rem;margin:0 auto;text-align:center;font-size:1.08rem;">
+      Тёплый пергамент и золочёные виньетки, живая средневековая лютня,
+      тактические бои на гексах со шкалой инициативы и карта приключений
+      с водяной мельницей, святилищем маны, сундуком сокровищ и рощей фей.
+      <br><em>Никаких замков, крафта и рутины — только путь благородного
+      паладина Рыцаря Аларика.</em>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>Как игра пишет сама себя</h2>
+    <div class="pipeline">
+      <div class="parchment"><h3>Игрок предлагает</h3><p>Идея или баг через форму ниже. Хранитель концепции
+        сверяет пожелание с духом игры: вписывается — принимается, нет — честный отказ с причиной.</p></div>
+      <div class="parchment"><h3>Gemini пишет</h3><p>Принятая задача становится техническим заданием —
+        с реальными файлами проекта — и исполняется моделью Gemini в отдельной ветке.</p></div>
+      <div class="parchment"><h3>Конвейер выпускает версию</h3><p>Сборка Godot и 37 тест-съютов — gate.
+        Затем независимое ревью, мерж — и новый APK на этой странице.</p></div>
+    </div>
+    <p class="how-link"><a href="how.html">✒ Читать: путь одного предложения — от письма до ТЗ</a></p>
+  </section>
+
+  <section class="container">
+    <h2>Летопись версий</h2>
+    <div class="changelog parchment" style="max-width:38rem;margin:0 auto;">
+      <p><span class="ver">v0.1.0</span> — первая публичная сборка</p>
+      <li>Карта приключений с интерактивными объектами</li>
+      <li>Тактические бои на гексах со шкалой инициативы</li>
+      <li>Книга заклинаний: Огненный Шар, Исцеление, Благословение, Ускорение</li>
+      <li>Конвейер самописи запущен — предложения игроков попадут в v0.2.0</li>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>📜 Книга Предложений</h2>
+    <div class="book-cta parchment" style="max-width:38rem;margin:0 auto;">
+      <p>Каждое пожелание игрока — свиток в Книге: суд концепции, реализация
+         руками Gemini и место в летописи версий.</p>
+      <a class="wood-btn" href="dashboard.html">Открыть Книгу Предложений</a>
+      <p style="margin-top:1.2rem;font-size:.95rem;">Хочешь добавить свой свиток? Заполни форму ниже 👇</p>
+    </div>
+  </section>
+
+  <section class="container" id="idea">
+    <h2>Предложить идею или баг 🛠</h2>
+    <p class="form-note" style="margin-bottom:1.2rem;">Прежде чем попасть к Gemini, предложение пройдёт суд концепции —
+      ламповой сказке без замков, крафта и мрачняка.</p>
+    <form action="https://formsubmit.co/taskivantitov@mail.ru" method="POST">
+      <input type="hidden" name="_subject" value="[KT] Предложение по игре">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
+      <input type="text" name="name" placeholder="Ник или имя" required>
+      <select name="kind" required>
+        <option value="" disabled selected>Что это?</option>
+        <option>💡 идея / фича</option>
+        <option>🐛 баг</option>
+        <option>⚖ баланс</option>
+        <option>✨ контент (существо, заклинание, объект)</option>
+      </select>
+      <textarea name="message" rows="5" placeholder="Опиши предложение: что хочешь видеть в игре и почему это вписывается в ламповые сказки" required></textarea>
+      <button class="wood-btn" type="submit" style="justify-self:center;">Отправить летописцу ✉</button>
+      <p class="form-note">Судьба свитка появится в Книге Предложений.</p>
+    </form>
+  </section>
+
+  <footer>
+    <p>«Сказки Королевства» · Godot 4.7 · <a href="/">ivantitov.tech</a> ·
+       игра дописывается игроками и Gemini</p>
+  </footer>
+</body>
+</html>

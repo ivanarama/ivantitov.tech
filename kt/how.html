@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как это работает — путь предложения | Сказки Королевства</title>
+  <meta name="description" content="Реальный пример: предложение игрока проходит триаж по концепции игры, превращается в техническое задание для Gemini, проходит gate и попадает в релиз.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prata&family=Alegreya:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <style>
+    :root { --ink: #4a3b1f; --ink-soft: #7a6540; --gold: #b8860b; --gold-bright: #d4a017; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(212,160,23,.08), transparent 60%),
+        linear-gradient(160deg, #2b1f12, #1a120a 60%, #120c06);
+      color: var(--ink); font-family: 'Alegreya', Georgia, serif; font-size: 17px; line-height: 1.65;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+    nav { padding: 1.1rem 0; }
+    nav .container { display: flex; justify-content: space-between; }
+    .logo { font-family: 'Prata', serif; text-decoration: none; color: #e8d9b0; font-size: 1rem; }
+    .logo:hover { color: var(--gold-bright); }
+    header.hero { text-align: center; padding: 2.2rem 0 1rem; }
+    h1 { font-family: 'Prata', serif; font-weight: 400; font-size: clamp(1.6rem, 5vw, 2.5rem); color: var(--gold-bright); }
+    .sub { color: #c9b98f; font-style: italic; margin-top: .7rem; }
+    .steps { margin: 1.8rem auto; }
+    .step {
+      position: relative; margin-bottom: 1.2rem; padding: 1.4rem 1.6rem 1.4rem 4.2rem;
+      background: #f0e4c4 url("assets/parchment_panel.png") center / 100% 100% no-repeat;
+      border-radius: 6px; box-shadow: 0 8px 26px rgba(0,0,0,.55);
+    }
+    .step::before {
+      content: attr(data-n); position: absolute; left: 1.2rem; top: 1.4rem;
+      width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center;
+      background: rgba(184,134,11,.2); color: var(--gold); font-family: 'Prata', serif; font-size: 1.05rem;
+    }
+    .step h2 { font-family: 'Prata', serif; font-weight: 400; font-size: 1.12rem; color: var(--ink); margin-bottom: .6rem; }
+    .step .who { font-family: 'Alegreya', serif; font-style: italic; font-size: .85rem; color: var(--ink-soft); margin-bottom: .7rem; }
+    pre {
+      background: rgba(255,252,240,.55); border: 1px solid rgba(122,101,64,.35);
+      border-radius: 8px; padding: .9rem 1.1rem; font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem; overflow-x: auto; white-space: pre-wrap; color: var(--ink); margin: .6rem 0;
+    }
+    .letter {
+      background: linear-gradient(160deg, #fdf6de, #f0e2b8);
+      color: #4a3b1f; border-radius: 8px; padding: 1rem 1.2rem;
+      border: 1px solid rgba(122,101,64,.4); font-size: .98rem;
+    }
+    .verdict-accept { color: #2e5d34; font-weight: 700; }
+    .verdict-reject { color: #8b2500; font-weight: 700; }
+    .arrow { text-align: center; color: var(--gold); font-size: 1.5rem; margin: .1rem 0; }
+    .cta { text-align: center; padding: 1.6rem 0 2.6rem; }
+    .btn {
+      display: inline-block; text-decoration: none; font-weight: 700; margin: 0 .4rem;
+      padding: .7rem 1.7rem; border-radius: 8px; color: #f5e7c8;
+      background: url("assets/btn_wood_normal.png") center / 100% 100% no-repeat;
+    }
+    .btn:hover { background-image: url("assets/btn_wood_hover.png"); }
+    .btn.ghost { background: none; border: 1px solid rgba(232,217,176,.45); color: #e8d9b0; }
+    footer { text-align: center; color: #a89565; font-size: .85rem; padding-bottom: 3rem; }
+    footer a { color: var(--gold-bright); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a class="logo" href="index.html">← Сказки Королевства</a>
+      <a class="logo" href="#wall-link">🎮 к стене предложений</a>
+    </div>
+  </nav>
+
+  <header class="hero container">
+    <h1>Путь одного предложения</h1>
+    <p class="sub">Реальная история, случившаяся 26 сентября 2026 года. Без сокращений —
+      так это и работает. Конвейер самопишущейся игры.</p>
+  </header>
+
+  <div class="container steps">
+    <div class="step" data-n="1">
+      <h2>Игрок пишет пожелание</h2>
+      <div class="who">форма на сайте / Telegram → конвейер разработки</div>
+      <div class="letter">
+        <b>Тема:</b> [KT] Добавьте заклинание Ледяной Шип — урон и замедление<br><br>
+        «Хочется холодной магии в книге заклинаний: Ледяной Шип — наносит урон одной цели
+        и замедляет её на 1 ход. Вписывается в школу стихий. Пусть будет за 6 маны.»
+      </div>
+      <p class="who" style="margin-top:.6rem">Письмо попадает в очередь, и за дело берётся хранитель концепции.</p>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="step" data-n="2">
+      <h2>Хранитель концепции решает судьбу</h2>
+      <div class="who">Gemini 3.8 Flash · сверка с CONCEPT.md · ~40 секунд</div>
+      <pre><span class="verdict-accept">ВЕРДИКТ: ПРИНЯТЬ</span>
+ПРИЧИНА: Заклинание «Ледяной Шип» отлично вписывается в канон светлой
+стихийной магии героя и обогатит тактический арсенал пошагового боя без
+нарушения баланса. Спасибо за идею, берём в разработку!
+КАТЕГОРИЯ: контент · ПРИОРИТЕТ: 6
+<span class="verdict-reject">А если бы игрок просил мультиплеер и крафт — вердикт был бы ОТКЛОНИТЬ
+с вежливой причиной: это противоречит столпам концепции.</span></pre>
+      <p class="who">Вердикт мгновенно появляется на «Стене предложений» на странице игры.
+        Сырой текст игрока никогда не доходит до исполнителя — только переписанное ТЗ.</p>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="step" data-n="3">
+      <h2>Техническое задание с опорой на реальный код</h2>
+      <div class="who">та же модель, уже как техлид — фрагмент настоящего ТЗ</div>
+      <pre>ТЕХНИЧЕСКОЕ ЗАДАНИЕ:
+Контекст: В боевую книгу магии героя требуется добавить стихийное
+заклинание «Ледяной Шип» (Ice Spike) стоимостью 6 маны…
+
+Что нужно:
+1. В src/core/spell_data.gd добавить запись "ice_spike" в реестр SPELLS:
+   mana_cost: 6, type: "target_enemy", замедление цели на 1 раунд.
+2. В assets/art/spells/ добавить ламповую иконку spell_ice_spike.png.
+3. В src/core/game_state.gd включить "ice_spike" в learned_spells.
+4. В src/battle/arena_viewport.gd — визуальный эффект ледяного шипа.
+5. В src/battle/battle_arena.gd — логика: урон, статус замедления
+   target_stack.buff_slow_turns = 1, всплывающий текст урона.</pre>
+      <p class="who">Пути файлов — настоящие: хранитель изучил структуру проекта, ТЗ готово для исполнителя «как есть».</p>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="step" data-n="4">
+      <h2>Gemini пишет, конвейер проверяет</h2>
+      <div class="who">исполнитель: Gemini 3.8 Flash (High) · отдельная ветка · gate-сборка</div>
+      <pre>исполнитель: правки по ТЗ в ветке предложения
+gate:  Godot headless import  +  37 тест-съютов игры  →  все зелёные
+ревью: независимая модель сверяет правки с ТЗ и концепцией
+мерж:  только после зелёного gate и ревью</pre>
+      <p class="who">Тесты игры — настоящие: они проверяют бой, эффекты, мобильную эргономику.
+        Сломал игру — релиз не выйдет, автоматически.</p>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="step" data-n="5">
+      <h2>Релиз и стена предложений</h2>
+      <div class="who">release-скрипт: bump версии → APK → страница игры</div>
+      <p>Новая версия выкладывается на эту страницу, предложение на «Стене» меняет
+        статус на <b style="color:var(--accent-mint)">«📦 в релизе vX.Y.Z»</b>, а ник игрока
+        попадает в летопись версий. От письма до релиза — без единого ручного коммита.</p>
+    </div>
+  </div>
+
+  <div class="cta container" id="wall-link">
+    <a class="btn" href="index.html#wall">Смотреть стену предложений</a>
+    <a class="btn ghost" href="index.html#idea">Предложить своё</a>
+  </div>
+
+  <footer>
+    <p><a href="index.html">«Сказки Королевства»</a> · самопишущаяся игра ·
+       игроки предлагают — Gemini пишет — конвейер проверяет</p>
+  </footer>
+</body>
+</html>
