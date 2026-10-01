@@ -457,6 +457,35 @@
        игра дописывается игроками и Gemini</p>
   </footer>
 
+  <!-- Модальное окно существа по центру экрана -->
+  <div class="creature-backdrop" id="creatureModalBackdrop" role="dialog" aria-modal="true">
+    <div class="creature-modal" id="creatureModal">
+      <button class="creature-modal-close" id="creatureModalClose" type="button" aria-label="Закрыть">✕</button>
+      <div class="creature-modal-body">
+        <div class="creature-modal-art">
+          <img id="modalCreatureImg" src="" alt="">
+        </div>
+        <div class="creature-modal-info">
+          <h3 id="modalCreatureName">Имя существа</h3>
+          <div class="creature-modal-tags">
+            <span class="creature-tag" id="modalCreatureBiome">Биом</span>
+            <span class="creature-tag" id="modalCreatureTier">Тир</span>
+          </div>
+          <div class="creature-stats">
+            <div class="stat-badge"><span class="stat-label">Здоровье</span><span class="stat-value" id="modalStatHp">--</span></div>
+            <div class="stat-badge"><span class="stat-label">Урон</span><span class="stat-value" id="modalStatDmg">--</span></div>
+            <div class="stat-badge"><span class="stat-label">Атака</span><span class="stat-value" id="modalStatAtk">--</span></div>
+            <div class="stat-badge"><span class="stat-label">Защита</span><span class="stat-value" id="modalStatDef">--</span></div>
+            <div class="stat-badge"><span class="stat-label">Скорость</span><span class="stat-value" id="modalStatSpd">--</span></div>
+            <div class="stat-badge"><span class="stat-label">Инициатива</span><span class="stat-value" id="modalStatInit">--</span></div>
+          </div>
+          <div class="creature-ability" id="modalCreatureAbility"></div>
+          <p class="creature-desc" id="modalCreatureDesc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const form = document.getElementById('suggestForm') || document.querySelector('form');
     if (form) {
@@ -720,86 +749,67 @@
       }
     };
 
-    const creatureBackdrop = document.getElementById('creatureModalBackdrop');
-    const creatureCloseBtn = document.getElementById('creatureModalClose');
+    function initCreatureModal() {
+      const creatureBackdrop = document.getElementById('creatureModalBackdrop');
+      const creatureCloseBtn = document.getElementById('creatureModalClose');
+      if (!creatureBackdrop || !creatureCloseBtn) return;
 
-    function openCreatureModal(key) {
-      const c = CREATURES[key];
-      if (!c) return;
-      document.getElementById('modalCreatureImg').src = c.img;
-      document.getElementById('modalCreatureImg').alt = c.name;
-      document.getElementById('modalCreatureName').textContent = c.name;
-      document.getElementById('modalCreatureBiome').textContent = c.biome;
-      document.getElementById('modalCreatureTier').textContent = c.tier;
-      document.getElementById('modalStatHp').textContent = c.hp;
-      document.getElementById('modalStatDmg').textContent = c.dmg;
-      document.getElementById('modalStatAtk').textContent = c.atk;
-      document.getElementById('modalStatDef').textContent = c.def;
-      document.getElementById('modalStatSpd').textContent = c.spd;
-      document.getElementById('modalStatInit').textContent = c.init;
-      document.getElementById('modalCreatureAbility').innerHTML = `<b>Способность:</b> ${c.ability}`;
-      document.getElementById('modalCreatureDesc').textContent = c.desc;
-      creatureBackdrop.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
+      window.openCreatureModal = function(key) {
+        const c = CREATURES[key];
+        if (!c) return;
+        document.getElementById('modalCreatureImg').src = c.img;
+        document.getElementById('modalCreatureImg').alt = c.name;
+        document.getElementById('modalCreatureName').textContent = c.name;
+        document.getElementById('modalCreatureBiome').textContent = c.biome;
+        document.getElementById('modalCreatureTier').textContent = c.tier;
+        document.getElementById('modalStatHp').textContent = c.hp;
+        document.getElementById('modalStatDmg').textContent = c.dmg;
+        document.getElementById('modalStatAtk').textContent = c.atk;
+        document.getElementById('modalStatDef').textContent = c.def;
+        document.getElementById('modalStatSpd').textContent = c.spd;
+        document.getElementById('modalStatInit').textContent = c.init;
+        document.getElementById('modalCreatureAbility').innerHTML = `<b>Способность:</b> ${c.ability}`;
+        document.getElementById('modalCreatureDesc').textContent = c.desc;
+        creatureBackdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      };
 
-    function closeCreatureModal() {
-      creatureBackdrop.classList.remove('open');
-      document.body.style.overflow = '';
-    }
+      window.closeCreatureModal = function() {
+        creatureBackdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      };
 
-    document.querySelectorAll('.unit').forEach(card => {
-      card.addEventListener('click', () => {
-        const u = card.dataset.unit;
-        if (u) openCreatureModal(u);
-      });
-      card.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
+      document.querySelectorAll('.unit').forEach(card => {
+        card.addEventListener('click', (e) => {
           e.preventDefault();
           const u = card.dataset.unit;
-          if (u) openCreatureModal(u);
+          if (u) window.openCreatureModal(u);
+        });
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const u = card.dataset.unit;
+            if (u) window.openCreatureModal(u);
+          }
+        });
+      });
+
+      creatureCloseBtn.addEventListener('click', window.closeCreatureModal);
+      creatureBackdrop.addEventListener('click', e => {
+        if (e.target === creatureBackdrop) window.closeCreatureModal();
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && creatureBackdrop.classList.contains('open')) {
+          window.closeCreatureModal();
         }
       });
-    });
+    }
 
-    creatureCloseBtn.addEventListener('click', closeCreatureModal);
-    creatureBackdrop.addEventListener('click', e => {
-      if (e.target === creatureBackdrop) closeCreatureModal();
-    });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && creatureBackdrop.classList.contains('open')) {
-        closeCreatureModal();
-      }
-    });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCreatureModal);
+    } else {
+      initCreatureModal();
+    }
   </script>
-
-  <!-- Модальное окно существа по центру экрана -->
-  <div class="creature-backdrop" id="creatureModalBackdrop" role="dialog" aria-modal="true">
-    <div class="creature-modal" id="creatureModal">
-      <button class="creature-modal-close" id="creatureModalClose" type="button" aria-label="Закрыть">✕</button>
-      <div class="creature-modal-body">
-        <div class="creature-modal-art">
-          <img id="modalCreatureImg" src="" alt="">
-        </div>
-        <div class="creature-modal-info">
-          <h3 id="modalCreatureName">Имя существа</h3>
-          <div class="creature-modal-tags">
-            <span class="creature-tag" id="modalCreatureBiome">Биом</span>
-            <span class="creature-tag" id="modalCreatureTier">Тир</span>
-          </div>
-          <div class="creature-stats">
-            <div class="stat-badge"><span class="stat-label">Здоровье</span><span class="stat-value" id="modalStatHp">--</span></div>
-            <div class="stat-badge"><span class="stat-label">Урон</span><span class="stat-value" id="modalStatDmg">--</span></div>
-            <div class="stat-badge"><span class="stat-label">Атака</span><span class="stat-value" id="modalStatAtk">--</span></div>
-            <div class="stat-badge"><span class="stat-label">Защита</span><span class="stat-value" id="modalStatDef">--</span></div>
-            <div class="stat-badge"><span class="stat-label">Скорость</span><span class="stat-value" id="modalStatSpd">--</span></div>
-            <div class="stat-badge"><span class="stat-label">Инициатива</span><span class="stat-value" id="modalStatInit">--</span></div>
-          </div>
-          <div class="creature-ability" id="modalCreatureAbility"></div>
-          <p class="creature-desc" id="modalCreatureDesc"></p>
-        </div>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
